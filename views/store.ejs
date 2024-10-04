@@ -1,0 +1,73 @@
+<%- include('../partials/navbar') %>
+<title>MeowStresser - Store</title>
+<link rel="stylesheet" href="/css/store.css">
+<div class="container mx-auto p-4 text-[#ccd2e3]" id="content" style="max-width: 80rem">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        <% const plans = [
+            { name: 'Basic 1 Plan', price: 10, concurrents: 1, maxTime: 1200 },
+            { name: 'Basic 2 Plan', price: 20, concurrents: 2, maxTime: 1800 },
+            { name: 'Basic 3 Plan', price: 40, concurrents: 4, maxTime: 2400 },
+            { name: 'Standard 1 Plan', price: 60, concurrents: 6, maxTime: 2400 },
+            { name: 'Standard 2 Plan', price: 80, concurrents: 8, maxTime: 2400 },
+            { name: 'Standard 3 Plan', price: 100, concurrents: 10, maxTime: 2400 },
+        ] %>
+        <% plans.forEach(plan => { %>
+            <div class="plan-card bg-card-bg p-6 rounded-lg shadow-lg w-full">
+                <h3 class="text-xl font-bold mb-4">
+                    <%= plan.name %>
+                </h3>
+                <p class="text-3xl font-bold mb-6">$<%= plan.price %><span class="text-sm font-normal">/month</span></p>
+                <ul class="space-y-2 mb-6 text-[#A6B0CF]">
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-[#43a100]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Concurrents: <%= plan.concurrents %>
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-[#43a100]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        Max time: <%= plan.maxTime %> seconds
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-[#43a100]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        API Access: Yes
+                    </li>
+                </ul>
+                <form action="/checkout" method="POST">
+                    <input type="hidden" name="planName" value="<%= plan.name %>">
+                    <input type="hidden" name="planPrice" value="<%= plan.price %>">
+                    <input type="hidden" name="concurrents" value="<%= plan.concurrents %>">
+                    <input type="hidden" name="maxTime" value="<%= plan.maxTime %>">
+                    <button type="submit" class="w-full bg-[#4458b8] text-white px-4 py-2 rounded-md transition-colors duration-300 hover:bg-[#2a3773]">Select Plan</button>
+                </form>
+            </div>
+        <% }) %>
+    </div>
+</div>
+<%- include('../partials/footer') %>
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const content = document.getElementById('content');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('slide-in-active');
+        content.classList.toggle('blurred');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    const plans = document.querySelectorAll('.plan-card');
+    plans.forEach(card => {
+        card.addEventListener('click', () => {
+            plans.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+        });
+    });
+</script>
+</body>
+</html>

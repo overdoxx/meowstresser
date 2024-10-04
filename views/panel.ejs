@@ -1,0 +1,357 @@
+<%- include('../partials/navbar') %>
+<title>MeowStresser - Panel</title>
+<link rel="stylesheet" href="/css/panel.css">
+<div class="container mx-auto p-4 text-[#ccd2e3]" id="content" style="max-width: 80rem">
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="loader"></div>
+    </div>
+    <div id="flashMessage" class="hidden fixed top-4 right-4 p-4 rounded-md text-white transition-opacity duration-300">
+        <span id="flashText"></span>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-card-bg p-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl fade-in">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Panel
+            </h2>
+            <div class="space-y-4">
+                <div class="flex space-x-4">
+                    <button id="layer4-btn" class="bg-[#4458b8] text-white px-4 py-2 rounded-md flex-grow transition-colors duration-300 hover:bg-[#2a3773]">Layer 4</button>
+                    <button id="layer7-btn" class="bg-[#151829] text-gray-400 px-4 py-2 rounded-md flex-grow transition-colors duration-300 hover:bg-[#2a3773] hover:text-white">Layer 7</button>
+                </div>
+                <div id="layer4-form" class="space-y-4 fade-in">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Address</label>
+                            <input type="text" id="layer4-address" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple" placeholder="0.0.0.0" required/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Port</label>
+                            <input type="text" id="layer4-port" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple" placeholder="80" required/>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Duration</label>
+                        <input type="text" id="layer4-duration" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple" placeholder="300" required/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Type</label>
+                        <select id="layer4-type" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple">
+                            <% Object.keys(layer4Methods).forEach(type => { %>
+                                <option value="<%= type %>"><%= type %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Method</label>
+                        <select id="layer4-method" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple"></select>
+                    </div>
+                </div>
+                <div id="layer7-form" class="space-y-4 hidden fade-in">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-400 mb-1">URL</label>
+                            <input type="text" id="layer7-url" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple" placeholder="https://example.com/" required/>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-1">Port</label>
+                            <input type="text" id="layer7-port" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple" placeholder="80" required/>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Duration</label>
+                        <input type="text" id="layer7-duration" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple" placeholder="300" required/>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Type</label>
+                        <select id="layer7-type" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple">
+                            <% Object.keys(layer7Methods).forEach(type => { %>
+                                <option value="<%= type %>"><%= type %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-1">Method</label>
+                        <select id="layer7-method" class="w-full bg-[#151829] text-white p-2 rounded-md transition-all duration-300 focus:ring-2 focus:ring-purple"></select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Concurrents: <span id="concurrents-value">1</span></label>
+                    <input type="range" id="concurrents-range" class="w-full" min="1" max="10" value="1" />
+                </div>
+                <button id="send-attack-btn" class="w-full bg-[#4458b8] text-white px-4 py-2 rounded-md transition-all duration-300 hover:bg-[#2a3773] pulse">Send Attack</button>
+            </div>
+        </div>
+        <div class="bg-card-bg p-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl fade-in">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold flex items-center">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 6V12L16 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Attacks
+                </h2>
+                <button onclick="stopAllAttacks()" class="bg-red-500 text-white px-4 py-2 rounded-md transition-all duration-300 hover:bg-red-600">Stop All</button>
+            </div>
+            <div class="overflow-x-auto m-0"> 
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left text-gray-400 border-b border-gray-700 overflow-x-auto">
+                            <th class="pb-3 px-4">ACTION</th>
+                            <th class="pb-3 px-4">HOST</th>
+                            <th class="pb-3 px-4">METHOD</th>
+                            <th class="pb-3 px-4">EXPIRES</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="overflow-y-auto" style="max-height: 27rem;"> 
+                    <table class="w-full">
+                        <tbody id="attacks-table-body"></tbody>
+                    </table>
+                </div>
+            </div>     
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer') %>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const content = document.getElementById('content');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('slide-in-active');
+        content.classList.toggle('blurred');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    const concurrentsRange = document.getElementById('concurrents-range');
+    const concurrentsValue = document.getElementById('concurrents-value');
+    const l4btn = document.getElementById('layer4-btn');
+    const l7btn = document.getElementById('layer7-btn');
+    const l4form = document.getElementById('layer4-form');
+    const l7form = document.getElementById('layer7-form');
+    const attacksTableBody = document.getElementById('attacks-table-body');
+    const layer4TypeSelect = document.getElementById('layer4-type');
+    const layer4MethodSelect = document.getElementById('layer4-method');
+    const layer7TypeSelect = document.getElementById('layer7-type');
+    const layer7MethodSelect = document.getElementById('layer7-method');
+
+    concurrentsRange.addEventListener('input', () => {
+        concurrentsValue.textContent = concurrentsRange.value;
+    });
+
+    const methods = <%- JSON.stringify(methods) %>;
+
+    function updateMethods(selectType, selectMethod, layer) {
+        selectMethod.innerHTML = '';
+        const selectedType = selectType.value;
+        const methodsForType = methods.filter(m => m.layer === layer && m.type === selectedType);
+
+        methodsForType.forEach(method => {
+            const option = document.createElement('option');
+            option.value = method.methodName;
+            option.textContent = method.methodName;
+            selectMethod.appendChild(option);
+        });
+    }
+
+    function showLayer4() {
+        l7form.classList.add('hidden');
+        l4form.classList.remove('hidden');
+        l4btn.classList.add('bg-[#4458b8]', 'text-white');
+        l4btn.classList.remove('bg-[#151829]', 'text-gray-400');
+        l7btn.classList.add('bg-[#151829]', 'text-gray-400');
+        l7btn.classList.remove('bg-[#4458b8]', 'text-white');
+        updateMethods(layer4TypeSelect, layer4MethodSelect, 4);
+    }
+
+    function showLayer7() {
+        l4form.classList.add('hidden');
+        l7form.classList.remove('hidden');
+        l7btn.classList.add('bg-[#4458b8]', 'text-white');
+        l7btn.classList.remove('bg-[#151829]', 'text-gray-400');
+        l4btn.classList.add('bg-[#151829]', 'text-gray-400');
+        l4btn.classList.remove('bg-[#4458b8]', 'text-white');
+        updateMethods(layer7TypeSelect, layer7MethodSelect, 7);
+    }
+
+    layer4TypeSelect.addEventListener('change', () => updateMethods(layer4TypeSelect, layer4MethodSelect, 4));
+    layer7TypeSelect.addEventListener('change', () => updateMethods(layer7TypeSelect, layer7MethodSelect, 7));
+
+    l4btn.addEventListener('click', showLayer4);
+    l7btn.addEventListener('click', showLayer7);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateMethods(layer4TypeSelect, layer4MethodSelect, 4);
+        updateMethods(layer7TypeSelect, layer7MethodSelect, 7);
+    });
+
+    const updateConcurrents = () => {
+        fetch('/api/concurrents')
+            .then(response => response.json())
+            .then(data => {
+                const rangeInput = document.getElementById('concurrents-range');
+                rangeInput.max = data.availableConcurrents;
+                rangeInput.value = Math.min(rangeInput.value, data.availableConcurrents);
+                concurrentsValue.textContent = rangeInput.value;
+            })
+            .catch(error => console.error('Error loading concurrents:', error));
+    };
+
+    setInterval(updateConcurrents, 1000);
+
+    concurrentsRange.addEventListener('input', () => {
+        concurrentsValue.textContent = concurrentsRange.value;
+    });
+
+    function showFlashMessage(message, type = 'success') {
+        const flashMessage = document.getElementById('flashMessage');
+        const flashText = document.getElementById('flashText');
+
+        flashText.textContent = message;
+        flashMessage.classList.remove('hidden', 'bg-green-500', 'bg-red-500');
+        flashMessage.classList.add('show', type === 'success' ? 'bg-green-500' : 'bg-red-500');
+
+        setTimeout(() => {
+            flashMessage.classList.remove('show');
+            setTimeout(() => {
+                flashMessage.classList.add('hidden');
+            }, 500);
+        }, 3000);
+    }
+
+    document.getElementById('send-attack-btn').addEventListener('click', async () => {
+        const layer4Active = !l4form.classList.contains('hidden');
+        const address = layer4Active ? document.getElementById('layer4-address').value : document.getElementById('layer7-url').value;
+        const port = layer4Active ? document.getElementById('layer4-port').value : document.getElementById('layer7-port').value;
+        const duration = layer4Active ? document.getElementById('layer4-duration').value : document.getElementById('layer7-duration').value;
+        const concurrents = concurrentsRange.value;
+        const layer = layer4Active ? 4 : 7;
+        const methodSelect = layer4Active ? layer4MethodSelect : layer7MethodSelect;
+        const method = methodSelect.value;
+
+        document.getElementById('loading-overlay').style.display = 'flex';
+
+        if (!address || !port || !duration) {
+            showFlashMessage('All fields are required.', 'error');
+            document.getElementById('loading-overlay').style.display = 'none';
+            return;
+        }
+
+        const portNumber = parseInt(port);
+        if (isNaN(portNumber) || portNumber < 1 || portNumber > 65535) {
+            showFlashMessage('Port must be a number between 1-65535.', 'error');
+            document.getElementById('loading-overlay').style.display = 'none';
+            return;
+        }
+
+        try {
+            const response = await fetch('/start-attack', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ address, port, duration, method, concurrents, layer })
+            });
+
+            const result = await response.json();
+            showFlashMessage(result.message, result.type);
+
+            document.getElementById('loading-overlay').style.display = 'none';
+
+            concurrentsRange.value = 1;
+            concurrentsValue.textContent = 1;
+        } catch (error) {
+            console.error('Error sending attack:', error);
+            showFlashMessage('Error sending attack', 'error');
+            
+            document.getElementById('loading-overlay').style.display = 'none';
+        }
+    });
+
+
+    function stopAllAttacks() {
+        fetch('/stop-attacks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                showFlashMessage('All attacks were successfully stopped!', 'success');
+            } else {
+                showFlashMessage('Error stopping attacks.', 'error');
+            }
+        }).catch(error => {
+            console.error('Error stopping attacks.', error);
+            showFlashMessage('Error stopping attacks.', 'error');
+        });
+    }
+
+    function stopAttack(attackId) {
+        fetch(`/stop-attack/${attackId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                showFlashMessage('Attack stopped successfully!', 'success');
+            } else {
+                showFlashMessage('Error stopping attack.', 'error');
+            }
+        }).catch(error => {
+            console.error('Error stopping attack.', error);
+            showFlashMessage('Error stopping attack.', 'error');
+        });
+    }
+
+    socket.on('updateTime', (data) => {
+        const { attackId, timeLeft } = data;
+        const attackRow = document.getElementById(`attack-${attackId}`);
+        if (attackRow) {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = Math.floor(timeLeft % 60);
+            attackRow.querySelector('.expires').textContent = `${minutes}m ${seconds}s`;
+        }
+    });
+
+    async function fetchUserAttacks() {
+        try {
+            const response = await fetch('/user-attacks');
+            const attacks = await response.json();
+
+            attacksTableBody.innerHTML = '';
+
+            attacks.forEach(attack => {
+                const timeLeft = attack.time - (new Date() - new Date(attack.startTime)) / 1000;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = Math.floor(timeLeft % 60);
+                const row = document.createElement('tr');
+                row.id = `attack-${attack.id}`;
+                row.className = 'border-b border-gray-700 hover:bg-[#151829] transition-colors duration-200';
+                row.innerHTML = `
+                    <td class="py-4 px-4"><button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 transition-colors duration-200" onclick="stopAttack('${attack.id}')">Stop</button></td>
+                    <td class="py-4 px-4">${attack.ip}</td>
+                    <td class="py-4 px-4">${attack.method}</td>
+                    <td class="py-4 px-4 expires">${minutes}m ${seconds}s</td>
+                `;
+                attacksTableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error fetching user attacks:', error);
+        }
+    }
+
+    setInterval(fetchUserAttacks, 1000);
+</script>
+</body>
+</html>

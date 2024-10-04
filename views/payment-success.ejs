@@ -1,0 +1,22 @@
+<%- include('../partials/navbar') %>
+<title>MeowStresser - Payment Success</title>
+<div class="container mx-auto p-4 text-[#ccd2e3]" id="content">
+    <div class="max-w-md mx-auto bg-card-bg p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-3xl font-bold mb-4">Payment Successful!</h2>
+        <p class="mb-4">Thank you for your purchase. Your plan has been activated.</p>
+        <a href="/hub" class="bg-[#4458b8] text-white px-4 py-2 rounded-md transition-colors duration-300 hover:bg-[#2a3773]">Go to Dashboard</a>
+    </div>
+</div>
+<%- include('../partials/footer') %>
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const content = document.getElementById('content');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('slide-in-active');
+        content.classList.toggle('blurred');
+        document.body.classList.toggle('no-scroll');
+    });
+</script>

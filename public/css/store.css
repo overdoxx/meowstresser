@@ -1,0 +1,35 @@
+@import 'common.css';
+
+.plan-card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.plan-card.selected {
+    border: 2px solid var(--purple);
+}
+
+.navbar a.active {
+    background-color: var(--purple);
+    color: white;
+}
+
+.actstore {
+    padding: 0.5rem 1rem;
+    background-color: var(--purple);
+    border-radius: 0.375rem;
+    color: white;
+    transition: background-color 300ms;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.actstore:hover {
+    background-color: var(--purple-hover);
+}

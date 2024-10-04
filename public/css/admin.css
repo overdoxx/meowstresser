@@ -1,0 +1,25 @@
+@import 'common.css';
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+.fixed-height {
+    max-height: 400px; 
+    overflow-y: auto;
+}
+
+.actadmin {
+    padding: 0.5rem 1rem;
+    background-color: var(--purple);
+    border-radius: 0.375rem;
+    color: white;
+    transition: background-color 300ms;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.actadmin:hover {
+    background-color: var(--purple-hover);
+}

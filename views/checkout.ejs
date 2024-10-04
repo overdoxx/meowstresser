@@ -1,0 +1,220 @@
+<%- include('../partials/navbar') %>
+<title>MeowStresser - Checkout</title>
+<link rel="stylesheet" href="/css/checkout.css" />
+<div class="container mx-auto p-4 mt-auto text-[#ccd2e3]" id="content" style="max-width: 80rem">
+    <div class="max-w-4xl mx-auto bg-[#1f2233] p-6 rounded-lg shadow-lg">
+        <div id="planSelection">
+            <h3 class="text-2xl font-bold mb-4 text-center"><%= plan.name %></h3>
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div class="w-full md:w-1/2 mb-6 md:mb-0">
+                    <p class="text-4xl font-bold text-center md:text-left">
+                        $<%= plan.price %><span class="text-sm font-normal">/month</span>
+                    </p>
+                    <ul class="space-y-2 mt-4">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-[#43a100]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg> Concurrents: <%= plan.concurrents %>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-[#43a100]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg> Max time: <%= plan.maxTime %> seconds
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-[#43a100]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg> API Access: Yes
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="mb-4">
+                        <label for="crypto" class="block text-sm font-medium mb-2">Select Cryptocurrency:</label>
+                        <select id="crypto" name="crypto" class="w-full p-2 bg-[#151829] rounded-md text-white">
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="xmr">Monero</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                    </div>
+                    <button id="payNow" class="w-full bg-[#4458b8] text-white px-4 py-2 rounded-md transition-colors duration-300 hover:bg-[#3a4c9f]">Pay Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="paymentInfo" class="hidden">
+            <h3 class="text-2xl font-bold mb-4 text-center">Payment Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-[#1a1e2e] p-4 rounded-lg">
+                    <p id="paymentId" class="mb-2 text-sm"></p>
+                    <div class="mb-4">
+                        <p class="text-sm text-[#8892b0]">Amount to pay:</p>
+                        <p id="cryptoAmount" class="text-2xl font-bold"></p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-sm text-[#8892b0]">Wallet address:</p>
+                        <div class="flex items-center">
+                            <p id="walletAddress" class="break-all text-sm mr-2"></p>
+                            <button id="copyAddress" class="bg-[#4458b8] text-white px-2 py-1 rounded-md text-xs">Copy</button>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-sm text-[#8892b0]">Time remaining:</p>
+                        <p id="countdown" class="text-lg font-bold"></p>
+                    </div>
+                    <div id="paymentStatusContainer" class="mt-4 p-2 rounded-md text-center font-bold"></div>
+                    <button id="backButton" class="mt-4 w-full bg-[#4458b8] text-white px-4 py-2 rounded-md transition-colors duration-300 hover:bg-[#3a4c9f]">Back to Plan Selection</button>
+                </div>
+                <div class="bg-[#1a1e2e] p-4 rounded-lg flex flex-col items-center justify-center">
+                    <div id="qrCodeContainer" class="bg-white p-4 rounded-lg mb-4">
+                        <div id="qrCode"></div>
+                    </div>
+                    <p class="text-sm text-center">Scan the QR code to pay</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-[#2a2f45] p-4 rounded-lg mt-6 text-center">
+            <p class="text-sm text-[#8892b0]">
+                <strong>Please note:</strong> Payment processing may take up to 5 minutes. Please be patient and do not refresh the page.
+            </p>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const content = document.getElementById('content');
+    const planSelection = document.getElementById('planSelection');
+    const paymentInfo = document.getElementById('paymentInfo');
+    const backButton = document.getElementById('backButton');
+    const copyAddressBtn = document.getElementById('copyAddress');
+    let countdownInterval;
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.toggle('slide-in-active');
+        content.classList.toggle('blurred');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    document.getElementById('payNow').addEventListener('click', async () => {
+        const crypto = document.getElementById('crypto').value;
+        const response = await fetch('/create-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                planName: '<%= plan.name %>',
+                planPrice: '<%= plan.price %>',
+                crypto: crypto
+            }),
+        });
+        const paymentData = await response.json();
+
+        planSelection.classList.add('hidden');
+        paymentInfo.classList.remove('hidden');
+        document.getElementById('paymentId').textContent = `Payment ID: ${paymentData.payment_id}`;
+        document.getElementById('cryptoAmount').textContent = `${paymentData.pay_amount} ${paymentData.pay_currency.toUpperCase()}`;
+        document.getElementById('walletAddress').textContent = paymentData.pay_address;
+
+        let expirationDate;
+        if (paymentData.expiration_timestamp) {
+            const timestamp = paymentData.expiration_timestamp.toString().length === 10 ?
+                paymentData.expiration_timestamp * 1000 :
+                parseInt(paymentData.expiration_timestamp);
+            expirationDate = new Date(timestamp);
+        } else {
+            expirationDate = new Date(Date.now() + 60 * 60 * 1000);
+        }
+
+        startCountdown(expirationDate);
+
+        new QRCode(document.getElementById('qrCode'), {
+            text: paymentData.pay_address,
+            width: 200,
+            height: 200,
+            colorDark: "#000000",
+            colorLight: "#FFFFFF",
+        });
+
+        checkPaymentStatus(paymentData.payment_id);
+    });
+
+    backButton.addEventListener('click', () => {
+        paymentInfo.classList.add('hidden');
+        planSelection.classList.remove('hidden');
+        document.getElementById('qrCode').innerHTML = '';
+        document.getElementById('paymentStatusContainer').innerHTML = '';
+        clearInterval(countdownInterval);
+    });
+
+    copyAddressBtn.addEventListener('click', () => {
+        const walletAddress = document.getElementById('walletAddress').textContent;
+        navigator.clipboard.writeText(walletAddress).then(() => {
+            copyAddressBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyAddressBtn.textContent = 'Copy';
+            }, 2000);
+        });
+    });
+
+    function startCountdown(endTime) {
+        const countdownElement = document.getElementById('countdown');
+        
+        countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = "EXPIRED";
+            }
+        }, 1000);
+    }
+
+    function checkPaymentStatus(paymentId) {
+        const statusContainer = document.getElementById('paymentStatusContainer');
+        const checkStatus = async () => {
+            const response = await fetch(`/check-payment-status/${paymentId}`);
+            const statusData = await response.json();
+
+            if (statusData.payment_status === 'waiting') {
+                statusContainer.innerHTML = `
+                  <div class="flex items-center justify-center bg-yellow-500 text-white p-2 rounded-md">
+                      <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Waiting for payment...
+                  </div>
+              `;
+                setTimeout(checkStatus, 1000);
+            } else if (statusData.payment_status === 'confirmed' || statusData.payment_status === 'finished') {
+                statusContainer.innerHTML = `
+                  <div class="flex items-center justify-center bg-green-500 text-white p-2 rounded-md">
+                      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                      Payment confirmed!
+                  </div>
+              `;
+                setTimeout(() => window.location.href = '/payment-success', 3000);
+            } else if (statusData.payment_status === 'failed' || statusData.payment_status === 'expired') {
+                statusContainer.innerHTML = `
+                  <div class="bg-red-500 text-white p-2 rounded-md">
+                      Payment ${statusData.payment_status}
+                  </div>
+              `;
+            }
+        };
+        checkStatus();
+    }
+</script>
+<%- include('../partials/footer') %>

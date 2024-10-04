@@ -1,0 +1,701 @@
+[
+    {
+      "methodName": "DNS",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "DNS"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "DNS"
+        }
+      ]
+    },
+    {
+      "methodName": "SSDP",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "SSDP"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "SSDP"
+        }
+      ]
+    },
+    {
+      "methodName": "WSD",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "WSD"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "WSD"
+        }
+      ]
+    },
+    {
+      "methodName": "MIX",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "AMP-MIX"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "AMP-MIX"
+        }
+      ]
+    },
+    {
+      "methodName": "SNMP",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "SNMP"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "SNMP"
+        }
+      ]
+    },
+    {
+      "methodName": "LDAP",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "AMP-LDAP"
+        }
+      ]
+    },
+    {
+      "methodName": "UDP-KR",
+      "layer": 4,
+      "type": "UDP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "UDP-KR"
+        }
+      ]
+    },
+    {
+      "methodName": "UDP-RAW",
+      "layer": 4,
+      "type": "UDP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "UDP-RAW"
+        }
+      ]
+    },
+    {
+      "methodName": "UDP-PPS",
+      "layer": 4,
+      "type": "UDP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "UDP-PPS"
+        }
+      ]
+    },
+    {
+      "methodName": "UDP-RAKNET",
+      "layer": 4,
+      "type": "UDP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "UDP-RAKNET"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-BOTNET",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-BOTNET"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-ACK",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-ACK"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "ACK"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-SYN",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-SYN"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "SYN"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-TLS",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-TLS"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "TLS"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-MIX",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-MIX"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-KILLER",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-KILLER"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-BYPASS",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-BYPASS"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-BURST",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-BURST"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "RST"
+        }
+      ]
+    },
+    {
+      "methodName": "OVH-TCP",
+      "layer": 4,
+      "type": "OVH",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "OVH-TCP"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "TCPOVH"
+        }
+      ]
+    },
+    {
+      "methodName": "OVH-UDP",
+      "layer": 4,
+      "type": "OVH",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "OVH-UDP"
+        }
+      ]
+    },
+    {
+      "methodName": "OVH-AMP",
+      "layer": 4,
+      "type": "OVH",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "OVH-AMP"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "AMPOVH"
+        }
+      ]
+    },
+    {
+      "methodName": "DISCORD",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "DISCORD"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "DISCORD"
+        }
+      ]
+    },
+    {
+      "methodName": "CS16",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "CS16"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "CS16"
+        }
+      ]
+    },
+    {
+      "methodName": "FIVEM",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "FIVEM"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "FIVEM"
+        }
+      ]
+    },
+    {
+      "methodName": "SAMP",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "SAMP"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "SAMP"
+        }
+      ]
+    },
+    {
+      "methodName": "MTA",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "MTA"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "MTA"
+        }
+      ]
+    },
+    {
+      "methodName": "RUST",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "RUST"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "RUST"
+        }
+      ]
+    },
+    {
+      "methodName": "RAINBOW",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "RAINBOW"
+        }
+      ]
+    },
+    {
+      "methodName": "TEAMSPEAK",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TEAMSPEAK"
+        }
+      ]
+    },
+    {
+      "methodName": "PUBG",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "PUBG"
+        }
+      ]
+    },
+    {
+      "methodName": "FORTNITE",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "FORTNITE"
+        }
+      ]
+    },
+    {
+      "methodName": "STEAM",
+      "layer": 4,
+      "type": "Exploit",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "STEAM"
+        }
+      ]
+    },
+    {
+      "methodName": " AMP-BR",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "AMP-BR"
+        }
+      ]
+    },
+    {
+      "methodName": "AMP-CN",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "AMP-CN"
+        }
+      ]
+    },
+    {
+      "methodName": "AMP-PK",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "AMP-PK"
+        }
+      ]
+    },
+    {
+      "methodName": "AMP-VN",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "AMP-VN"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-CN",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-CN"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-BR",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "TCP-BR"
+        }
+      ]
+    },
+    {
+      "methodName": "HOME-BR",
+      "layer": 4,
+      "type": "Geolocation",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HOME-BR"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-AUTOBYPASS",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HTTP-AUTOBYPASS"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-BYPASS (Cloudflare)",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HTTP-BYPASS"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-RAPE (Cloudflare)",
+      "layer": 7,
+      "type": "Special",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HTTP-RAPE"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-DREAMS (Cloudflare)",
+      "layer": 7,
+      "type": "Special",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HTTP-DREAMS"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-BIGRS (Domain Only)",
+      "layer": 7,
+      "type": "Special",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HTTP-BIGRS"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-RAW (Basic Targets)",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "dreamStresser",
+          "methodApiName": "HTTP-RAW"
+        },
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTPRAW"
+        }
+      ]
+    },
+    {
+      "methodName": "PRO",
+      "layer": 4,
+      "type": "AMP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "PRO"
+        }
+      ]
+    },
+    {
+      "methodName": "UDP-HIGHT",
+      "layer": 4,
+      "type": "UDP",
+      "apis": [
+        {
+          "name": "stresser Asia",
+          "methodApiName": "HIGHT"
+        }
+      ]
+    },
+    {
+      "methodName": "TS3",
+      "layer": 4,
+      "type": "Bypass",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "TS3"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-HANDSHACKE",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "TCPHANDSHACKE"
+        }
+      ]
+    },
+    {
+      "methodName": "TPC-TFO",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "TFO"
+        }
+      ]
+    },
+    {
+      "methodName": "TCP-AMP",
+      "layer": 4,
+      "type": "TCP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "TCPAMP"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-HEAD",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTPHEAD"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-POST",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTPPOST"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-TURBO",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTP-TURBO"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-DESTROYER",
+      "layer": 7,
+      "type": "HTTP BEST",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTP-DESTROYER"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-BROWSER",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTP-BROWSER"
+        }
+      ]
+    },
+    {
+      "methodName": "HTTP-STORM",
+      "layer": 7,
+      "type": "HTTP",
+      "apis": [
+        {
+          "name": "stresserAsia",
+          "methodApiName": "HTTP-STORM"
+        }
+      ]
+    }
+  ]

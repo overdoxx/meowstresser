@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Authentication</title>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/login.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+        <script>
+            function toggleForm() {
+                const loginForm = document.getElementById('login-form');
+                const registerForm = document.getElementById('register-form');
+                loginForm.classList.toggle('hidden');
+                registerForm.classList.toggle('hidden');
+            }
+
+            function fadeOut(element, callback) {
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.style.display = 'none';
+                        if (callback) callback();
+                    }, 500);
+                }, 1200);
+            }
+
+            window.onload = function() {
+                const flashMessage = document.querySelector('.flash-message');
+                if (flashMessage) {
+                    flashMessage.style.display = 'block';
+                    fadeOut(flashMessage, () => {
+                        if ('<%= redirect %>' === 'true' && flashMessage.classList.contains('success')) {
+                            window.location.href = '/hub';
+                        }
+                    });
+                }
+            };
+        </script>
+    </head>
+    <body class="flex items-center justify-center min-h-screen">
+        <% if (typeof message !== 'undefined' && message.length > 0) { %>
+            <div class="flash-message <%= messageType %>">
+                <%- message %>
+            </div>
+        <% } %>
+        <div class="card">
+            <div id="login-form">
+                <h2 class="text-xl font-bold mb-6">Authentication</h2>
+                <form action="/login" method="POST">
+                    <div class="mb-4">
+                        <label class="block mb-1">Username</label>
+                        <input type="text" name="username" placeholder="Username" class="w-full p-2 rounded-md" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-1">Password</label>
+                        <input type="password" name="password" placeholder="Password" class="w-full p-2 rounded-md" required>
+                    </div>
+                    <div class="cf-turnstile mb-4" data-sitekey="0x4AAAAAAAkkuyy_0irPhIB9"></div>
+                    <button type="submit" class="w-full btn-primary text-white p-2 rounded-md mb-4">Sign in</button>
+                </form>
+                <p class="text-sm">New on our website? <span class="toggle-link" onclick="toggleForm()">Create an account</span></p>
+            </div>
+            <div id="register-form" class="hidden">
+                <h2 class="text-xl font-bold mb-6">Registration</h2>
+                <form action="/register" method="POST">
+                    <div class="mb-4">
+                        <label class="block mb-1">Username</label>
+                        <input type="text" name="username" placeholder="Username" class="w-full p-2 rounded-md" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-1">Password</label>
+                        <input type="password" name="password" placeholder="Password" class="w-full p-2 rounded-md" required>
+                    </div>
+                    <div class="cf-turnstile mb-4" data-sitekey="0x4AAAAAAAkkuyy_0irPhIB9"></div>
+                    <button type="submit" class="w-full btn-primary text-white p-2 rounded-md mb-4">Register</button>
+                </form>
+                <p class="text-sm">Already have an account? <span class="toggle-link" onclick="toggleForm()">Sign in</span></p>
+            </div>
+        </div>
+    </body>
+</html>

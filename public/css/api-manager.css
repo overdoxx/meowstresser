@@ -1,0 +1,37 @@
+@import 'common.css';
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+}
+
+th, td {
+    padding: 0.5rem;
+}
+
+tr:nth-child(even) {
+    background-color: #151829;
+}
+
+button {
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: var(--purple-hover);
+}
+
+.actapi {
+    padding: 0.5rem 1rem;
+    background-color: var(--purple);
+    border-radius: 0.375rem;
+    color: white;
+    transition: background-color 300ms;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.actapi:hover {
+    background-color: var(--purple-hover);
+}

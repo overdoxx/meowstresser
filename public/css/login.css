@@ -1,0 +1,57 @@
+@import 'common.css';
+
+body {
+    background-color: #151829;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+}
+
+.card {
+    background-color: #1f2233;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: auto;
+}
+
+.toggle-link {
+    color: var(--purple);
+    cursor: pointer;
+}
+
+input {
+    background-color: #252a3e;
+    border: 1px solid #454b5e;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--purple);
+}
+
+.btn-primary {
+    background-color: var(--purple);
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--purple-hover);
+}
+
+.flash-message {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #38a169;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    display: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.flash-message.error {
+    background-color: #e53e3e;
+}
